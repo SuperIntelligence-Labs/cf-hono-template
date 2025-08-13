@@ -2,9 +2,10 @@
   "name": "cf-hono-template",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy --minify",
-    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+    "typecheck": "tsc --noEmit",
+    "dev": "bun run typecheck && wrangler dev",
+    "deploy": "bun run typecheck && wrangler deploy --minify",
+    "cf-typegen": "bun run typecheck && wrangler types --env-interface CloudflareBindings"
   },
   "peerDependencies": {
     "typescript": "^5.9.2"
@@ -16,10 +17,10 @@
     "eslint": "^9.33.0",
     "globals": "^16.3.0",
     "typescript-eslint": "^8.39.1",
-    "wrangler": "^4.4.0"
+    "wrangler": "^4.4.0",
+    "jiti": "^2.5.1"
   },
   "dependencies": {
-    "hono": "^4.9.1",
-    "jiti": "^2.5.1"
+    "hono": "^4.9.1"
   }
 }
