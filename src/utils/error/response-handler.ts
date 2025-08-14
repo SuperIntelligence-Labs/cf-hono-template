@@ -19,7 +19,7 @@ export function handleResult<T>(result: Result<T, AppError>): Response {
             logger.error(`[${err.identifier}] ${err.message}`);
             const status = mapErrorToStatus(err);
             return new Response(
-                JSON.stringify(error(err.message, status, [err.identifier])),
+                JSON.stringify(error(err.message, status, err.identifier)),
                 {
                     status,
                     headers: {"Content-Type": "application/json"},
