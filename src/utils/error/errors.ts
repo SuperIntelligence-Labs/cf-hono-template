@@ -1,5 +1,5 @@
 // Base class for all app errors
-abstract class AppError extends Error {
+export abstract class AppError extends Error {
     protected constructor(public identifier: string, message: string) {
         super(message);
         this.name = this.constructor.name;
@@ -7,22 +7,21 @@ abstract class AppError extends Error {
 }
 
 // General-purpose errors
-
 export class NotFoundError extends AppError {
     constructor(resource?: string) {
-        super("NOT_FOUND", `Resource not found${resource ? ": " + resource : ""}`);
+        super("RESOURCE_NOT_FOUND", `Resource not found${resource ? ": " + resource : ""}`);
     }
 }
 
 export class UnauthorizedError extends AppError {
     constructor(details?: string) {
-        super("UNAUTHORIZED", `Unauthorized access.${details ? " " + details : ""}`);
+        super("REQUEST_UNAUTHORIZED", `Unauthorized access.${details ? " " + details : ""}`);
     }
 }
 
 export class ForbiddenError extends AppError {
     constructor(details?: string) {
-        super("FORBIDDEN", `Forbidden action.${details ? " " + details : ""}`);
+        super("REQUEST_FORBIDDEN", `Forbidden action.${details ? " " + details : ""}`);
     }
 }
 
@@ -34,13 +33,13 @@ export class ValidationError extends AppError {
 
 export class ConflictError extends AppError {
     constructor(details?: string) {
-        super("CONFLICT", `Conflict detected.${details ? " " + details : ""}`);
+        super("RESOURCE_CONFLICT", `Conflict detected.${details ? " " + details : ""}`);
     }
 }
 
 export class TimeoutError extends AppError {
     constructor(details?: string) {
-        super("TIMEOUT", `Operation timed out.${details ? " " + details : ""}`);
+        super("CONNECTION_TIMEOUT", `Operation timed out.${details ? " " + details : ""}`);
     }
 }
 

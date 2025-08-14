@@ -1,5 +1,5 @@
 import { ok, err, Result } from "neverthrow";
-import { NotFoundError, UnauthorizedError } from "../utils/errors.ts";
+import { NotFoundError, UnauthorizedError } from "../utils/error/errors.ts";
 import logger from "../utils/logger.ts";
 
 /**
