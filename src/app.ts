@@ -9,7 +9,7 @@ import {NotFoundError} from "./utils/error/errors.ts";
 import {handleResult} from "./utils/error/response-handler.ts";
 import {err} from "neverthrow";
 
-export const app = new Hono<{ Bindings: Env }>();
+const app = new Hono<{ Bindings: Env }>();
 
 // Middlewares
 app.use("*", logger());
@@ -25,3 +25,4 @@ app.notFound((c) => {
 });
 
 
+export default app;
