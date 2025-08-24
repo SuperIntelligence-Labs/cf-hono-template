@@ -1,9 +1,10 @@
 /**
  * This file will contain all the routes for the application.
  * **/
-import {type Env, Hono} from "hono";
+import {Hono} from "hono";
+import type {AppEnv} from "../config/app-env.ts";
 
-const routes = new Hono<{ Bindings: Env }>();
+const routes = new Hono<AppEnv>();
 
 
 export default routes;
