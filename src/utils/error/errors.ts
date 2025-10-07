@@ -49,9 +49,15 @@ export class InternalServerError extends AppError {
     }
 }
 
-export class NetworkError extends AppError {
+export class ServiceUnavailableError extends AppError {
     constructor(details?: string) {
-        super("NETWORK_ERROR", details);
+        super("SERVICE_UNAVAILABLE", details);
+    }
+}
+
+export class BadRequestError extends AppError {
+    constructor(details?: string) {
+        super("BAD_REQUEST", details);
     }
 }
 
