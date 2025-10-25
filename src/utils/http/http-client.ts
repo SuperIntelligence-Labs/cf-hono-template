@@ -1,23 +1,31 @@
 import {CookieJar} from "./cookie-jar.ts";
 
-export function createHttpClient(): HttpClient {
-    return new HttpClient();
+export function createHttpClient(defaultHeaders?: Record<string, string>): HttpClient {
+    return new HttpClient(undefined, defaultHeaders);
 }
 
 interface JsonBody {
     [key: string]: unknown;
 }
 
-class HttpClient {
+export class HttpClient {
     private cookieJar: CookieJar;
+    private defaultHeaders: Record<string, string>;
 
-    constructor(cookieJar?: CookieJar) {
+    constructor(cookieJar?: CookieJar, defaultHeaders?: Record<string, string>) {
         this.cookieJar = cookieJar || new CookieJar();
+        this.defaultHeaders = defaultHeaders || {};
     }
 
     async request(url: string, options: RequestInit = {}, customHeaders?: Record<string, string>): Promise<Response> {
         const headers = new Headers(options.headers);
 
+        // Apply default headers first
+        Object.entries(this.defaultHeaders).forEach(([key, value]) => {
+            headers.set(key, value);
+        });
+
+        // Then apply custom headers (they can override default headers)
         if (customHeaders) {
             Object.entries(customHeaders).forEach(([key, value]) => {
                 headers.set(key, value);
